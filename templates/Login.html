@@ -4,12 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Accueil</title>
-    <link rel="stylesheet" href="../static/ACCUEIL CSS/bootstrap/css/bootstrap.min.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/Login CSS/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i">
-    <link rel="stylesheet" href="../static/ACCUEIL CSS/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="../static/ACCUEIL CSS/css/Growing-Search-Bar-Animated-Text-Input.css">
+    <link rel="stylesheet" href="../static/Login CSS/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../static/Login CSS/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="../static/Login CSS/css/Growing-Search-Bar-Animated-Text-Input.css">
+    <link rel="stylesheet" href="../static/Login CSS/css/Login-Form-Clean.css">
 </head>
 
 <body>
@@ -37,22 +39,26 @@
     <header class="masthead text-center text-white">
         <div class="masthead-content">
             <div class="container">
-                <h1 class="masthead-heading mb-0">Bienvenue sur le site</h1>
-                <h2 class="masthead-subheading mb-0">"Not-Spotify"</h2><a class="btn btn-primary btn-xl rounded-pill mt-5" role="button" href="#">En savoir plus</a>
+                <h1 class="masthead-heading mb-0">Page de connexion</h1>
             </div>
         </div>
-        <div class="bg-circle-1 bg-circle"></div>
-        <div class="bg-circle-2 bg-circle"></div>
-        <div class="bg-circle-3 bg-circle"></div>
-        <div class="bg-circle-4 bg-circle"></div>
     </header>
+    <div class="login-clean">
+        <form method="post">
+            <h2 class="sr-only">Login Form</h2>
+            <div class="illustration"><i class="icon ion-ios-navigate"></i></div>
+            <div class="form-group"><input class="form-control" type="text" placeholder="Pseudo" name="pseudo"></div>
+            <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Mot de Passe"></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Se connecter</button></div><a class="forgot" href="#">S'inscrire</a>
+        </form>
+    </div>
     <footer class="py-5 bg-black">
         <div class="container">
             <p class="text-center text-white m-0 small">Projet Flask ¤ JOUSSELIN x DHAUSSY</p>
         </div>
     </footer>
-    <script src="../static/ACCUEIL CSS/js/jquery.min.js"></script>
-    <script src="../static/ACCUEIL CSS/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/Login CSS/js/jquery.min.js"></script>
+    <script src="../static/Login CSS/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
