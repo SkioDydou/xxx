@@ -7,6 +7,7 @@ def accueil():
         "Accueil.html"
     )
 
+<<<<<<< HEAD
 @app.route("/aPropos")
 def aPropos():
     return render_template(
@@ -48,3 +49,5 @@ def recherche():
     return render_template(
         "Recherche.html"
     )
+=======
+>>>>>>> master
