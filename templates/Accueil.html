@@ -18,15 +18,15 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item"></li>
-                    <li class="nav-item"><a class="nav-link" href="Accueil.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for ("accueil") }}">Accueil</a></li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item"></li>
-                    <li class="nav-item"><a class="nav-link" href="ListeDesAlbums.html">Tous les albums</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for("listeDesAlbums") }}">Tous les albums</a></li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item"></li>
-                    <li class="nav-item"><a class="nav-link" href="Login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for ("login") }}">Login</a></li>
                 </ul>
                 <div class="d-flex justify-content-center h-100">
                     <div class="searchbar"><input type="text" class="search_input" placeholder="Search..."><a class="search_icon" href="#"><i class="fas fa-search"></i></a></div>
@@ -38,7 +38,7 @@
         <div class="masthead-content">
             <div class="container">
                 <h1 class="masthead-heading mb-0">Bienvenue sur le site</h1>
-                <h2 class="masthead-subheading mb-0">"Not-Spotify"</h2><a class="btn btn-primary btn-xl rounded-pill mt-5" role="button" href="#">En savoir plus</a>
+                <h2 class="masthead-subheading mb-0">"Not-Spotify"</h2><a class="btn btn-primary btn-xl rounded-pill mt-5" role="button" href="{{ url_for("aPropos") }}">En savoir plus</a>
             </div>
         </div>
         <div class="bg-circle-1 bg-circle"></div>
