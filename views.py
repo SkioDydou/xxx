@@ -1,51 +1,58 @@
 from .app import app
 from flask import render_template
-from .models import get_titre
 
 @app.route("/")
 def accueil():
     return render_template(
-        "Accueil.html"
+        "Accueil.html",
+        
     )
 
 @app.route("/aPropos")
 def aPropos():
     return render_template(
-        "aPropos.html"
+        "aPropos.html",
+        
     )
 
 @app.route("/Inscription")
-def lnscription():
+def Inscription():
     return render_template(
-        "Inscription.html"
+        "Inscription.html",
+        
     )
 
 @app.route("/ListeDesAlbums")
 def listeDesAlbums():
     return render_template(
-        "ListeDesAlbums.html"
+        "ListeDesAlbums.html",
+        
     )
 
 @app.route("/login")
 def login():
     return render_template(
-        "Login.html"
+        "Login.html",
+        
     )
 
-@app.route("/ModificationAlbum")
+@app.route("/ModificationAlbum/<int:id>")
 def modificationAlbum():
     return render_template(
-        "ModificationAlbum.html"
+        "ModificationAlbum.html",
+        
     )
 
 @app.route("/ModificationArtiste")
 def modificationArtiste():
     return render_template(
-        "ModificationAriste.html"
+        "ModificationArtiste.html",
+        
     )
 
 @app.route("/Recherche")
 def recherche():
     return render_template(
-        "Recherche.html"
+        "Recherche.html",
+        
     )

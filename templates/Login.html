@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Login</title>
+    <title>Connexion</title>
     <link rel="stylesheet" href="../static/Login CSS/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i">
@@ -49,7 +49,7 @@
             <div class="illustration"><i class="icon ion-ios-navigate"></i></div>
             <div class="form-group"><input class="form-control" type="text" placeholder="Pseudo" name="pseudo"></div>
             <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Mot de Passe"></div>
-            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Se connecter</button></div><a class="forgot" href="Inscription.html">S'inscrire</a>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Se connecter</button></div><a class="forgot" href="{{ url_for ("Inscription") }}">S'inscrire</a>
         </form>
     </div>
     <footer class="py-5 bg-black">
