@@ -1,21 +1,13 @@
-###Artistes
-- artiste: PNL
-  prenom: Nabil / Tarik
-  naiss: 25 avril 1989 / 26 décembre 1986
-- artiste: JUL
-  prenom: Julien Mari
-  naiss: 14 janvier 1990
-- artiste: Wejdene
-  prenom: Wejdene
-  naiss: Inconnue
 ###Albums
-- titre: La Machine
-  nomArtiste: Jul
-  nbDeSons: 30
-  genre: Rap
-- titre: Deux frères
-  nomArtiste: PNL
-  nbDeSons: 16
-- titre: "16"
-  nomArtiste: Wejdene
-  nbDeSons: 11
+- id: 1
+  titre: "La machine"
+  nomArtiste: "Jul"
+  nombreSons: 16
+  genre: "Rap"
+  img: "machine.png"
+###Artiste
+- id: 1
+  nomDeScene: "Jul"
+  prenom: "Julien Mari"
+  dateNaiss: "14 janvier 1990"
+  img: "jul.png"

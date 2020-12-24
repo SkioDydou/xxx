@@ -1,5 +1,6 @@
 from .app import app
 from flask import render_template
+from .models import get_titre
 
 @app.route("/")
 def accueil():

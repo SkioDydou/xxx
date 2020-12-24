@@ -6,3 +6,13 @@ from flask_login import LoginManager
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
+
+def mkpath(p):
+    return os.path.normpath(
+        os.path.join(
+            os.path.dirname(__file__),
+            p))
+
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    'sqlite:///'+mkpath('../myapp.db'))
+db = SQLAlchemy(app)
