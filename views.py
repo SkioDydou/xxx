@@ -1,6 +1,6 @@
 from .app import app
 from flask import render_template
-from .models import get_titre
+from .models import get_titre, Album, Artiste, get_album
 
 @app.route("/")
 def accueil():
@@ -23,7 +23,8 @@ def lnscription():
 @app.route("/ListeDesAlbums")
 def listeDesAlbums():
     return render_template(
-        "ListeDesAlbums.html"
+        "ListeDesAlbums.html",
+        albums = get_album()
     )
 
 @app.route("/login")
