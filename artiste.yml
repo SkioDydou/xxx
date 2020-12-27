@@ -1,0 +1,15 @@
+- id: 1
+  nomDeScene: "Jul"
+  prenom: "Julien Mari"
+  dateNaiss: "14 janvier 1990"
+  img: "jul.png"
+- id: 2
+  nomDeScene: "PNL"
+  prenom: "Nabyl et Tarik"
+  dateNaiss: "25 avril 1989 et 26 decembre 1986"
+  img: "PNL.png"
+- id: 3
+  nomDeScene: "Wejdene"
+  prenom: "Wejdene"
+  dateNaiss: "Inconnue"
+  img: "Wejdene.png"

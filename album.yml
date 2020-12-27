@@ -1,0 +1,24 @@
+- id: 1
+  titre: "La machine"
+  nomArtiste: "Jul"
+  nombreSons: 16
+  genre: "Rap"
+  img: "machine.png"
+- id: 2
+  titre: "Deux Frères"
+  nomArtiste: "PNL"
+  nombreSons: 22
+  genre: "Rap"
+  img: "DF.png"
+- id: 3
+  titre: "Dans la Légende"
+  nomArtiste: "PNL"
+  nombreSons: 16
+  genre: "Rap"
+  img: "DLL.png"
+- id: 4
+  titre: "Seize"
+  nomArtiste: "Wejdene"
+  nombreSons: 11
+  genre: "Rap"
+  img: "Seize.png"
