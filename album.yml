@@ -1,24 +1,20 @@
-- id: 1
-  titre: "La machine"
-  nomArtiste: "Jul"
-  nombreSons: 16
-  genre: "Rap"
-  img: "machine.png"
-- id: 2
-  titre: "Deux Frères"
-  nomArtiste: "PNL"
-  nombreSons: 22
-  genre: "Rap"
-  img: "DF.png"
-- id: 3
-  titre: "Dans la Légende"
-  nomArtiste: "PNL"
-  nombreSons: 16
-  genre: "Rap"
-  img: "DLL.png"
-- id: 4
-  titre: "Seize"
-  nomArtiste: "Wejdene"
-  nombreSons: 11
-  genre: "Rap"
-  img: "Seize.png"
+- author: Jul
+  img: machine.png
+  title: La Machine
+  annee: 2020
+  genre: Rap
+- author: PNL
+  img: DF.png
+  title: Deux Frères
+  annee: 2019
+  genre: Rap
+- author: Wejdene
+  img: seize.png
+  title: Seize
+  annee: 2020
+  genre: Rap
+- author: Nekfeu
+  img: feu.jpg
+  title: Feu
+  annee: 2015
+  genre: Rap
