@@ -18,5 +18,6 @@ app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = (
     'sqlite:///' + mkpath('../myapp.db')
 )
-app.config['SECRET_KEY'] = "7E9B2040-FFA0-4383-9BA9-4AC714F0F10B"
+app.config['SECRET_KEY'] = "1f5e8ff9-7c55-445b-b1e4-f22e64ccb97e"
+
 db = SQLAlchemy(app)

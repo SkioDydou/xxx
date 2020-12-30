@@ -56,10 +56,11 @@ def login():
         "Login.html"
     )
 
-@app.route("/ModificationAlbum")
-def modificationAlbum():
+@app.route("/ModificationAlbum/<id>")
+def modificationAlbum(id):
     return render_template(
-        "ModificationAlbum.html"
+        "ModificationAlbum.html",
+        album = get_details(id)
     )
 
 @app.route("/ModificationArtiste")
@@ -74,3 +75,9 @@ def recherche():
         "Recherche.html"
     )
 
+@app.route('/auteur/<int:id>')
+def one_author(id):
+    return render_template('one_author.html',
+    author = get_author(id),
+    livres = get_livres_by_author(id)
+    )
