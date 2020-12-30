@@ -50,13 +50,13 @@
                 <div class="col-md-4 col-lg-3 item">
                     <div class="box" style="background: url(&quot;../static/img/{{ item["img"] }}&quot;) center / contain no-repeat;">
                         <div class="cover" style="background: rgba(32,160,11,0.75);">
-                            <h3 class="name">{{ item["titre"] }}</h3>
-                            <p class="title">{{ item["nomArtiste"] }}</p>
+                            <h3 class="name">{{ item["title"] }}</h3>
+                            <p class="title">{{ item["author"] }}</p>
                             <div class="social">
-                                <p style="color: var(--light);">{{ item["nombreSons"] }} musiques</p>
+                                <p style="color: var(--light);">{{ item["annee"] }}</p>
                             </div>
                         </div>
-                    </div><button class="btn btn-primary" type="button"><a class="xx" href="{{ url_for("modificationAlbum") }}">Modifier</a></button><button class="btn btn-primary" type="button">Ajouter à ma playlist</button>
+                    </div><button class="btn btn-primary" onclick="location.href='{{ url_for('one_author', id = item.author_id) }}'" type="button">Modifier</button><button class="btn btn-primary" type="button">Ajouter à ma playlist</button>
                 </div>
                 {% endfor %}
             </div>

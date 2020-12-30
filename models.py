@@ -5,7 +5,7 @@ class Author(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     def __repr__(self):
-        return "<Author (%d) %s>" % (self.id, self.name)
+        return (self.name)
 
 class Album(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,7 +15,8 @@ class Album(db.Model):
     genre = db.Column(db.String(100))
     author_id = db.Column(db.Integer, db.ForeignKey("author.id"))
     author = db.relationship("Author", backref = db.backref("albums", lazy="dynamic"))
-	
+    def __repr__(self):
+        return "<Album : (%d) %s>" % (self.id, self.title)
 
 class User(db.Model, UserMixin):
     username = db.Column(db.String(50), primary_key = True)
