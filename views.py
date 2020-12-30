@@ -1,6 +1,29 @@
-from .app import app
-from flask import render_template
-from .models import get_titre, Album, Artiste, get_album
+from .app import app, db
+from flask import render_template, url_for, redirect, flash, request
+from .models import get_sample, get_details, get_author, get_livres_by_author, get_author_by_name, Author, User, Album
+from flask_wtf import FlaskForm
+from wtforms import StringField, HiddenField, PasswordField
+from wtforms.validators import DataRequired
+from hashlib import sha256
+from flask_login import login_user, current_user, logout_user, login_required
+
+class AuthorForm(FlaskForm):
+    id = HiddenField('id')
+    name = StringField('nom', validators = [DataRequired()])
+
+class LoginForm(FlaskForm):
+    username = StringField('Pseudo')
+    password = PasswordField('Mot de passe')
+    next = HiddenField()
+
+    def get_authenticated_user(self):
+        user = User.query.get(self.username.data)
+        if user is None:
+            return None
+        m = sha256()
+        m.update(self.password.data.encode())
+        passwd = m.hexdigest()
+        return user if passwd == user.password else None
 
 @app.route("/")
 def accueil():
@@ -24,7 +47,7 @@ def lnscription():
 def listeDesAlbums():
     return render_template(
         "ListeDesAlbums.html",
-        albums = get_album()
+        albums = get_sample()
     )
 
 @app.route("/login")
@@ -50,3 +73,4 @@ def recherche():
     return render_template(
         "Recherche.html"
     )
+

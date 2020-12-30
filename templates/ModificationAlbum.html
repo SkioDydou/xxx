@@ -46,6 +46,7 @@
         <div class="bg-circle-3 bg-circle"></div>
         <div class="bg-circle-4 bg-circle"></div>
     </header>
+    {% block main %}
     <section>
         <div class="container">
             <div class="row align-items-center">
@@ -54,13 +55,14 @@
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="p-5"><img src="../static/img/loading.gif" style="width: 50px;">
-                        <p>Titre de l'album :&nbsp; La machine<br><br>Nom de l'artiste : Jul le sang<br><br>Nombre de musiques : 165<br><br>Genre(s) : Rap Fr<br></p>
+                        <p>Titre de l'album :&nbsp; {{ album.titre }}<br><br>Nom de l'artiste : Jul le sang<br><br>Nombre de musiques : 165<br><br>Genre(s) : Rap Fr<br></p>
                         <div class="d-flex"><button class="btn btn-primary" type="button" style="margin-right: 2px;margin-bottom: 3px;">Enregistrer les changements</button><button class="btn btn-primary" type="button" style="margin-right: 2px;margin-bottom: 3px;">Supprimer</button></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    {% endblock %}
     <footer class="py-5 bg-black">
         <div class="container">
             <p class="text-center text-white m-0 small">Projet Flask ¤ JOUSSELIN x DHAUSSY</p>
