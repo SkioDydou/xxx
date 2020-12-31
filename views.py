@@ -1,6 +1,6 @@
 from .app import app, db
 from flask import render_template, url_for, redirect, flash, request
-from .models import get_sample, get_details, get_author, get_livres_by_author, get_author_by_name, Author, User, Album
+from .models import get_sample, get_details, get_author, get_albums_by_author, get_author_by_name, Author, User, Album
 from flask_wtf import FlaskForm
 from wtforms import StringField, HiddenField, PasswordField
 from wtforms.validators import DataRequired
@@ -9,7 +9,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 class AuthorForm(FlaskForm):
     id = HiddenField('id')
-    name = StringField('nom', validators = [DataRequired()])
+    title = StringField('nom', validators = [DataRequired()])
 
 class LoginForm(FlaskForm):
     username = StringField('Pseudo')
@@ -74,10 +74,38 @@ def recherche():
     return render_template(
         "Recherche.html"
     )
+@app.route("/edit/author/")
+@app.route("/edit/author/<int:id>")
+def edit_author(id = None):
+    nom = None
+    if id is not None:
+        a = get_details(id)
+        nom = a.title
+    else:
+        a = None
+    f = AuthorForm(id = id, name = nom)
+    return render_template("edit-author.html", album = a, form = f)
 
-@app.route('/auteur/<int:id>')
+@app.route("/save/author/", methods=["POST"])
+def save_author():
+    a = None
+    f = AuthorForm()
+    if f.validate_on_submit():
+        if f.id.data != "":
+            id = int(f.id.data)
+            a = get_details(id)
+            a.title = f.title.data
+        else:
+            a = Album(title = f.title.data)
+            db.session.add(a) 
+        db.session.commit()
+        id = a.id
+        return redirect(url_for('listeDesAlbums', id = id))
+    return render_template("edit-author.html", album = a, form = f)
+
+@app.route('/author/<int:id>')
 def one_author(id):
-    return render_template('one_author.html',
+    return render_template('edit-author.html',
     author = get_author(id),
-    livres = get_livres_by_author(id)
+    albums = get_albums_by_author(id)
     )

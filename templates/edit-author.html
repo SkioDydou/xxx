@@ -1,5 +1,3 @@
-{% block main %}
-{% for album in albums %}
 <!DOCTYPE html>
 <html>
 
@@ -7,16 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Modif album</title>
-    <link rel="stylesheet" href="../static/ModificationAlbum CSS/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/ModificationAlbum CSS/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i">
-    <link rel="stylesheet" href="../static/ModificationAlbum CSS/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="../static/ModificationAlbum CSS/css/Growing-Search-Bar-Animated-Text-Input.css">
+    <link rel="stylesheet" href="../../static/ModificationAlbum CSS/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../static/ModificationAlbum CSS/css/Growing-Search-Bar-Animated-Text-Input.css">
 </head>
-
 <body>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark navbar-custom">
-        <div class="container"><img src="../static/img/passpotify-logo.png" style="width: 80px;height: 80px;"><a class="navbar-brand" href="#"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarResponsive"><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><img src="../../static/img/passpotify-logo.png" style="width: 80px;height: 80px;"><a class="navbar-brand" href="#"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarResponsive"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item"></li>
@@ -36,10 +33,11 @@
             </div>
         </div>
     </nav>
+    {% block main %}
     <header class="masthead text-center text-white">
         <div class="masthead-content">
             <div class="container">
-                <h1 class="masthead-heading mb-0">Modifier l'album : </h1>
+                <h1 class="masthead-heading mb-0">Modification de l'album</h1>
                 <h2 class="masthead-subheading mb-0">"{{ album.title }}"</h2>
             </div>
         </div>
@@ -48,21 +46,38 @@
         <div class="bg-circle-3 bg-circle"></div>
         <div class="bg-circle-4 bg-circle"></div>
     </header>
-    <section>
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 order-lg-2">
-                    <div class="p-5"><img class="rounded-circle img-fluid" src="{{ url_for('static', filename='img/'+ album.img) }}"></div>
-                </div>
-                <div class="col-lg-6 order-lg-1">
-                    <div class="p-5"><img src="../static/img/loading.gif" style="width: 50px;">
-                        <p>Titre de l'album :&nbsp; {{ album.title }}<br><br>Nom de l'artiste : {{ album.author }}<br><br>Année d'écriture : {{ album.annee }}<br><br>Genre(s) : {{ album.genre }}<br></p>
-                        <div class="d-flex"><button class="btn btn-primary" type="button" style="margin-right: 2px;margin-bottom: 3px;">Enregistrer les changements</button><button class="btn btn-primary" type="button" style="margin-right: 2px;margin-bottom: 3px;">Supprimer</button></div>
-                    </div>
-                </div>
+    <h1>Edit author : {{ album.title }}</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="list-group">
+                {% for message in messages %}
+                    <li class="list-group-item list-group-item-danger">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+        <form role="form" method="POST", action="{{ url_for('save_author') }}">
+            {{ form.hidden_tag() }}
+            <div class=
+            {% if form.title.errors %} 
+            "form-group has-error"
+            {% else %}
+            "form-group"
+            {% endif %}
+            >
+                {{ form.title.label }} {{ form.title(size = 50, class_="form-control") }}
             </div>
-        </div>
-    </section>
+            {% if form.title.errors %}
+            <ul class="list-group">
+                {% for e in form.title.errors %}
+                    <li class="list-group-item list-group-item-danger"> cc</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            
+            <input class="btn btn-default" type="submit" value="Enregistrer">
+        </form>
+    {% endblock %}
     <footer class="py-5 bg-black">
         <div class="container">
             <p class="text-center text-white m-0 small">Projet Flask ¤ JOUSSELIN x DHAUSSY</p>
@@ -70,8 +85,6 @@
     </footer>
     <script src="../static/ModificationArtiste CSS/js/jquery.min.js"></script>
     <script src="../static/ModificationArtiste CSS/bootstrap/js/bootstrap.min.js"></script>
-</body>
 
+</body>
 </html>
-{% endfor %}
-{% endblock %}
