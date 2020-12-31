@@ -35,7 +35,7 @@ def get_details(id):
 def get_author(id):
     return Author.query.get_or_404(id)
 
-def get_livres_by_author(id):
+def get_albums_by_author(id):
     return Album.query.filter(Album.author_id == id).all()
     
 def get_author_by_name(name):
