@@ -32,6 +32,9 @@ def get_details(id):
     #return Album.query.get(id)
     return Album.query.get_or_404(id)
 
+def get_details2(id):
+    return Author.query.get_or_404(id)
+    
 def get_author(id):
     return Author.query.get_or_404(id)
 
