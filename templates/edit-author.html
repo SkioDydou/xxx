@@ -68,8 +68,11 @@
                             {% endif %}
                             >
                                 {{ form.title.label }} {{ form.title(size = 50, class_="form-control") }}
+                                <br>
                                 {{ form.annee.label }} {{ form.annee(size=50, class_="form-control") }}
+                                <br>
                                 {{ form.genre.label }} {{ form.genre(size=50, class_="form-control") }}
+                                <br>
                                 {{ form.auteur.label }} {{ form.auteur(size=50, class_="form-control") }}
                             </div>
                             {% if form.title.errors %}

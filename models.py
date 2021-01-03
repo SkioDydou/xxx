@@ -18,9 +18,19 @@ class Album(db.Model):
     def __repr__(self):
         return "<Album : (%d) %s>" % (self.id, self.title)
 
+@login_manager.user_loader
+def load_user(username):
+    return User.query.get(username)
+
+from flask_login import UserMixin
 class User(db.Model, UserMixin):
-    username = db.Column(db.String(50), primary_key = True)
-    password = db.Column(db.String(64))
+    __tablename__='user'
+    username    = db.Column(db.String(50), primary_key=True)
+    password    = db.Column(db.String(64))
+    nom         = db.Column(db.String(72))
+    prenom      = db.Column(db.String(72))
+    email       = db.Column(db.String(120), nullable=False)
+
 
     def get_id(self):
         return self.username
@@ -34,7 +44,7 @@ def get_details(id):
 
 def get_details2(id):
     return Author.query.get_or_404(id)
-    
+
 def get_author(id):
     return Author.query.get_or_404(id)
 
@@ -50,4 +60,7 @@ def get_author_by_name(name):
 @login_manager.user_loader
 def load_user(username):
     return User.query.get(username)
+
+def sup_album(id):
+    return Album.query.filter(Album.id==id).delete()
 
