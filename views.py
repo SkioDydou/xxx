@@ -1,6 +1,6 @@
 from .app import app, db
 from flask import render_template, url_for, redirect, flash, request
-from .models import get_sample, get_details, get_details2, get_author, get_albums_by_author, get_author_by_name, Author, User, Album
+from .models import get_sample, get_details, get_details2, get_author, get_albums_by_author, get_author_by_name, sup_album, Author, User, Album
 from flask_wtf import FlaskForm
 from wtforms import StringField, HiddenField, PasswordField, IntegerField
 from wtforms.validators import DataRequired
@@ -28,6 +28,22 @@ class LoginForm(FlaskForm):
         m.update(self.password.data.encode())
         passwd = m.hexdigest()
         return user if passwd == user.password else None
+
+class InscriptionForm(FlaskForm):
+        username    = StringField('Username')
+        prenom      = StringField('First name')
+        nom         = StringField('Last name')
+        email       = StringField('Email')
+        password    = PasswordField('Password')
+        confirmePsw = PasswordField('Confirm Password')
+
+        def valideUsername(self):
+            user = User.query.get(self.username.data)
+            if user is None:
+                print(self.confirmePsw.data)
+                return self if self.confirmePsw.data == self.password.data else 2
+            else :
+                return 1;
 
 @app.route("/")
 def accueil():
@@ -66,9 +82,12 @@ def login():
             next = f.next.data or (url_for('accueil'))
             return redirect(next)
     return render_template(
-        "Login.html"
+        "Login.html", form = f
     )
-@app.route('/logout/')
+    
+from flask_login import logout_user
+@app.route("/logout/")
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('accueil'))
@@ -91,6 +110,13 @@ def recherche():
     return render_template(
         "Recherche.html"
     )
+
+@app.route("/delete/album/<int:id>")
+def delete_album(id):
+    sup_album(id)
+    db.session.commit()
+    return redirect(url_for('listeDesAlbums'))
+
 @app.route("/edit/album/")
 @app.route("/edit/album/<int:id>")
 def edit_album(id = None):
@@ -127,3 +153,25 @@ def one_author(id):
     author = get_author(id),
     albums = get_albums_by_author(id)
     )
+
+@app.route("/inscription/", methods=("GET","POST",))
+def inscription():
+    erreur = 0
+    f = InscriptionForm()
+    if f.validate_on_submit():
+        user = f.valideUsername()
+        if user!=1 and user!=2 and user :
+            m = sha256()
+            m.update(user.password.data.encode())
+            u = User(username=user.username.data, prenom=user.prenom.data,
+            nom=user.nom.data, email=user.email.data, password=m.hexdigest())
+            db.session.add(u)
+            db.session.commit()
+            login_user(u)
+            return redirect(url_for('accueil'))
+        elif(user == 1):
+            erreur = 1
+
+        else :
+            erreur = 2
+    return render_template("Inscription.html",form=f, erreur=erreur, title="Inscription")
