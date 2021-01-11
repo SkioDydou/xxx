@@ -35,8 +35,10 @@ class User(db.Model, UserMixin):
     def get_id(self):
         return self.username
 
+
 def get_sample():
     return Album.query.all()
+
 
 def get_details(id):
     #return Album.query.get(id)
@@ -60,6 +62,7 @@ def get_author_by_name(name):
 @login_manager.user_loader
 def load_user(username):
     return User.query.get(username)
+
 
 def sup_album(id):
     return Album.query.filter(Album.id==id).delete()

@@ -2,7 +2,7 @@ from .app import app, db
 from flask import render_template, url_for, redirect, flash, request
 from .models import get_sample, get_details, get_details2, get_author, get_albums_by_author, get_author_by_name, sup_album, Author, User, Album
 from flask_wtf import FlaskForm
-from wtforms import StringField, HiddenField, PasswordField, IntegerField
+from wtforms import StringField, HiddenField, PasswordField, IntegerField, SubmitField
 from wtforms.validators import DataRequired
 from hashlib import sha256
 from flask_login import login_user, current_user, logout_user, login_required
@@ -30,20 +30,24 @@ class LoginForm(FlaskForm):
         return user if passwd == user.password else None
 
 class InscriptionForm(FlaskForm):
-        username    = StringField('Username')
-        prenom      = StringField('First name')
-        nom         = StringField('Last name')
-        email       = StringField('Email')
-        password    = PasswordField('Password')
-        confirmePsw = PasswordField('Confirm Password')
+    username    = StringField('Username')
+    prenom      = StringField('First name')
+    nom         = StringField('Last name')
+    email       = StringField('Email')
+    password    = PasswordField('Password')
+    confirmePsw = PasswordField('Confirm Password')
 
-        def valideUsername(self):
-            user = User.query.get(self.username.data)
-            if user is None:
-                print(self.confirmePsw.data)
-                return self if self.confirmePsw.data == self.password.data else 2
-            else :
-                return 1;
+    def valideUsername(self):
+        user = User.query.get(self.username.data)
+        if user is None:
+            print(self.confirmePsw.data)
+            return self if self.confirmePsw.data == self.password.data else 2
+        else :
+            return 1;
+
+class RechercheForm(FlaskForm):
+    search = StringField('Rechercher', [DataRequired()])
+    submit = SubmitField('Rechercher')
 
 @app.route("/")
 def accueil():
@@ -57,11 +61,7 @@ def aPropos():
         "aPropos.html"
     )
 
-@app.route("/Inscription")
-def lnscription():
-    return render_template(
-        "Inscription.html"
-    )
+
 
 @app.route("/ListeDesAlbums")
 def listeDesAlbums():
@@ -99,11 +99,6 @@ def modificationAlbum(id):
         album = get_details(id)
     )
 
-@app.route("/ModificationArtiste")
-def modificationArtiste():
-    return render_template(
-        "ModificationAriste.html"
-    )
 
 @app.route("/Recherche")
 def recherche():
@@ -175,3 +170,4 @@ def inscription():
         else :
             erreur = 2
     return render_template("Inscription.html",form=f, erreur=erreur, title="Inscription")
+

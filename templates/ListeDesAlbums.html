@@ -31,10 +31,17 @@
                     <li class="nav-item"></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for("listeDesAlbums") }}">Tous les albums</a></li>
                 </ul>
+                {% if current_user.is_authenticated %}
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for ("logout") }}">Logout</a></li>
+                </ul>
+                {% else %}
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item"></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for ("login") }}">Login</a></li>
                 </ul>
+                {% endif %}
                 <div class="d-flex justify-content-center h-100">
                     <div class="searchbar"><input type="text" class="search_input" placeholder="Search..."><a class="search_icon" href="#"><i class="fas fa-search"></i></a></div>
                 </div>
@@ -45,6 +52,9 @@
         <div class="masthead-content">
             <div class="container">
                 <h1 class="masthead-heading mb-0">Liste de tous les albums</h1>
+                {% if current_user.is_authenticated %}
+                <br><button class="btn btn-primary" type="button" style="margin-right: 2px;margin-bottom: 3px;">Ajouter un album</button>
+                {% endif %}
             </div>
         </div>
     </header>

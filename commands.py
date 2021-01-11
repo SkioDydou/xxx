@@ -28,6 +28,7 @@ def loaddb(filename):
             img = x["img"],
             annee = x["annee"],
             genre = x["genre"],
+            note = x["note"],
             author_id = a.id
         )
         db.session.add(u)
