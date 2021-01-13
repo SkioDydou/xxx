@@ -1,5 +1,5 @@
 from .app import app, db
-from flask import render_template, url_for, redirect, flash, request
+from flask import render_template, url_for, redirect, flash, request, Flask, request, jsonify
 from .models import get_sample, get_details, get_details2, get_author, get_albums_by_author, get_author_by_name, sup_album, Author, User, Album
 from flask_wtf import FlaskForm
 from wtforms import StringField, HiddenField, PasswordField, IntegerField, SubmitField
@@ -52,13 +52,15 @@ class RechercheForm(FlaskForm):
 @app.route("/")
 def accueil():
     return render_template(
-        "Accueil.html"
+        "Accueil.html",
+        title="PasSpotify"
     )
 
 @app.route("/aPropos")
 def aPropos():
     return render_template(
-        "aPropos.html"
+        "aPropos.html",
+        title="A Propos"
     )
 
 
@@ -67,7 +69,8 @@ def aPropos():
 def listeDesAlbums():
     return render_template(
         "ListeDesAlbums.html",
-        albums = get_sample()
+        albums = get_sample(),
+        title="Liste Des Albums"
     )
 
 @app.route("/login/", methods = ["GET", "POST"])
@@ -82,7 +85,8 @@ def login():
             next = f.next.data or (url_for('accueil'))
             return redirect(next)
     return render_template(
-        "Login.html", form = f
+        "Login.html", form = f,
+        title="Login"
     )
     
 from flask_login import logout_user
@@ -96,14 +100,16 @@ def logout():
 def modificationAlbum(id):
     return render_template(
         "ModificationAlbum.html",
-        album = get_details(id)
+        album = get_details(id),
+        title="Modification Album"
     )
 
 
 @app.route("/Recherche")
 def recherche():
     return render_template(
-        "Recherche.html"
+        "Recherche.html",
+        title="Recherche"
     )
 
 @app.route("/delete/album/<int:id>")
@@ -123,7 +129,8 @@ def edit_album(id = None):
     else:
         a = None
     f = AlbumForm(id = id, name = nomAlbum )
-    return render_template("edit-author.html", album = a, form = f)
+    return render_template("edit-author.html", album = a, form = f,
+    title="Edition Album")
 
 @app.route("/save/album/", methods=["POST"])
 def save_album():
@@ -133,20 +140,22 @@ def save_album():
         if f.id.data != "":
             id = int(f.id.data)
             b = get_author(id)
-            a = get_details(id)
+            a = get_details(id) 
             b.name = f.auteur.data
             a.title = f.title.data
             a.annee = f.annee.data
             a.genre = f.genre.data
         db.session.commit()
         return redirect(url_for('listeDesAlbums', id = id))
-    return render_template("edit-author.html", album = a, form = f)
+    return render_template("edit-author.html", album = a, form = f,
+    title="Sauvegarde Album")
 
 @app.route('/album/<int:id>')
 def one_author(id):
     return render_template('edit-author.html',
     author = get_author(id),
-    albums = get_albums_by_author(id)
+    albums = get_albums_by_author(id),
+    title="PasSpotify"
     )
 
 @app.route("/inscription/", methods=("GET","POST",))
@@ -171,3 +180,19 @@ def inscription():
             erreur = 2
     return render_template("Inscription.html",form=f, erreur=erreur, title="Inscription")
 
+class SearchForm(FlaskForm):
+  search = StringField('search', [DataRequired()])
+  submit = SubmitField('Search',
+                       render_kw={'class': 'btn btn-success btn-block'})
+
+@app.route('/search', methods=['POST'])
+def search():
+    form = SearchForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        return redirect((url_for('search_results', query=form.search.data)))
+    return render_template('Recherche.html', form=form)
+
+@app.route('/search', methods=['GET', 'POST'])
+def search_results(query):
+  results = Album.query.whoosh_search(query).all()
+  return render_template('Recherche.html', query=query, results=results)

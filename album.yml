@@ -1,60 +1,81 @@
 - author: Jul
-  img: machine.png
+  img: https://static.fnac-static.com/multimedia/Images/FR/NR/21/e1/bc/12378401/1540-1/tsp20200525171128/Nouvel-album-27-05-2020.jpg
   title: La Machine
   annee: 2020
   genre: Rap
 - author: PNL
-  img: DF.png
+  img: https://www.abcdrduson.com/wp-content/uploads/2019/04/pnl-deux-freres.png
   title: Deux Frères
   annee: 2019
   genre: Rap
 - author: Wejdene
-  img: seize.png
+  img: https://images-na.ssl-images-amazon.com/images/I/81-0trN-41L._SL1400_.jpg
   title: Seize
   annee: 2020
   genre: Rap
 - author: Nekfeu
-  img: feu.jpg
+  img: https://static.fnac-static.com/multimedia/Images/FR/NR/04/67/6c/7104260/1540-1/tsp20170119122501/Feu.jpg
   title: Feu
   annee: 2015
   genre: Rap
 - author: Vald
-  img: cemondeestcruel.jpeg
+  img: https://static.fnac-static.com/multimedia/Images/FR/NR/29/94/ad/11375657/1540-1/tsp20190917101105/Ce-monde-est-cruel.jpg
   title: Ce monde est cruel
   annee: 2019
   genre: Rap
 - author: Tsew The Kid
-  img: diavolana.jpg
+  img: https://t2.genius.com/unsafe/771x0/https%3A%2F%2Fimages.genius.com%2F91af60eac6e9f1611a51ebd0fc17bd2f.665x665x1.jpg
   title: Diavolana
   annee: 2020
   genre: Rap
+- author: 13 Organisé
+  img: https://images.genius.com/fcf333280da6d461b4ead9ad27218d29.600x600x1.jpg
+  title: 13 Organisé
+  annee: 2020
+  genre: Rap
 - author: Sexion D'Assaut
-  img: apogee.jpeg
+  img: https://images-na.ssl-images-amazon.com/images/I/81CkW7CewzL._SL1200_.jpg
   title: L'Apogée
   annee: 2012
   genre: Rap
 - author: Lomepal
-  img: Flip.jpeg
+  img: https://static.fnac-static.com/multimedia/Images/FR/NR/f3/98/8e/9345267/1507-1/tsp20180125134658/Flip.jpg
   title: Flip
   annee: 2017
   genre: Rap
 - author: Colonel Reyel
-  img: aurapport.jpeg
+  img: https://static.fnac-static.com/multimedia/FR/Images_Produits/FR/fnac.com/Visual_Principal_340/5/4/8/3760108354845/tsp20120919094850/Au-rapport.jpg
   title: Au rapport
   annee: 2012
   genre: Rap
 - author: Eva Queen
-  img: Queen.jpeg
+  img: https://static.fnac-static.com/multimedia/Images/FR/NR/e3/1f/aa/11149283/1507-1/tsp20190611093127/Queen.jpg
   title: Queen
   annee: 2019
   genre: Rap
 - author: Maroon Five
-  img: V.jpeg
+  img: https://images-na.ssl-images-amazon.com/images/I/71s0enhlXcL._SL1500_.jpg
   title: V
   annee: 2017
   genre: Electropop
 - author: Sia
-  img: everyday.jpeg
+  img: https://images-na.ssl-images-amazon.com/images/I/71qxD26QQjL._SL1200_.jpg
   title: Everyday is Christmas
   annee: 2018
   genre: Fêtes
+- author: Joyce Jonathan
+  img: https://images-na.ssl-images-amazon.com/images/I/716vglIMDmL._SL1400_.jpg
+  title: Une Place Pour Moi
+  annee: 2016
+  genre: Pop
+- author: 47Ter
+  img: https://static.fnac-static.com/multimedia/Images/FR/NR/37/32/ae/11416119/1540-1/tsp20190923090702/L-adree.jpg
+  title: L'Adresse
+  annee: 2019
+  genre: Rap
+- author: Ashkidd
+  img: https://www.musiqueurbaine.fr/wp-content/uploads/2017/11/14/2015-ep-cruise-363x363.jpe
+  title: Cruise
+  annee: 2016
+  genre: Rap
+
