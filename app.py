@@ -11,7 +11,7 @@ def mkpath(p):
     )
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 Bootstrap(app)
 login_manager = LoginManager(app)
 login_manager.login_view = "login"

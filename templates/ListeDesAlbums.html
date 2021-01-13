@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Liste Des Albums</title>
+    <title>{{title}}</title>
     <link rel="stylesheet" href="../static/LISTE CSS/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i">
@@ -64,7 +64,7 @@
             <div class="row justify-content-center people">
             	{% for item in albums %}
                 <div class="col-md-4 col-lg-3 item" onclick="location.href='{{ url_for('modificationAlbum', id = item.author_id) }}'">
-                    <div class="box" style="background: url(&quot;../static/img/{{ item["img"] }}&quot;) center / contain no-repeat;">
+                    <div class="box" style="background: url(&quot;{{ item["img"] }}&quot;) center / contain no-repeat;">
                         <div class="cover" style="background: rgba(32,160,11,0.75);">
                             <h3 class="name">{{ item["title"] }}</h3><h4 class="title">de {{ item["author"] }}</h4>
                             <p class="title">{{ item["genre"] }}</p>

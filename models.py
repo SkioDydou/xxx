@@ -10,10 +10,9 @@ class Author(db.Model):
 class Album(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
-    img = db.Column(db.String(100))
+    img = db.Column(db.String(1000))
     annee = db.Column(db.String(100))
     genre = db.Column(db.String(100))
-    note = db.Column(ARRAY(db.Float))
     author_id = db.Column(db.Integer, db.ForeignKey("author.id"))
     author = db.relationship("Author", backref = db.backref("albums", lazy="dynamic"))
     def __repr__(self):
