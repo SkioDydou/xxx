@@ -14,6 +14,8 @@
 </head>
 
 <body>
+    {% block body %}
+    {% block main %}
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark navbar-custom">
         <div class="container"><img src="../static/img/passpotify-logo.png" style="width: 80px;height: 80px;"><a class="navbar-brand" href="#"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarResponsive"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -43,7 +45,7 @@
                 </ul>
                 {% endif %}
                 <div class="d-flex justify-content-center h-100">
-                    <div class="searchbar"><input type="text" class="search_input" placeholder="Search..."><a class="search_icon" href="#"><i class="fas fa-search"></i></a></div>
+                    <div class="searchbar"><a class="search_icon" href="{{ url_for ("search") }}"><i class="fas fa-search"></i></a></div>
                 </div>
             </div>
         </div>
@@ -51,15 +53,57 @@
     <header class="masthead text-center text-white">
         <div class="masthead-content">
             <div class="container">
-                <h1 class="masthead-heading mb-0">Résultat de la recherche :</h1>
-                <h2 class="masthead-subheading mb-0">"2020"</h2>
+                <h1 class="masthead-heading mb-0">Résultat de la recherche par {{type_recherche}} :</h1>
+                <h2 class="masthead-subheading mb-0">"{{recherche}}"</h2>
             </div>
         </div>
     </header>
-    {% block body %}
-    <div>
-        {{ render_form(url_for('search'), form) }}
+    <section class="d-flex justify-content-center" id="search-bar" style="margin-top: 45px;">
+        <form method="POST" action="{{ url_for('search') }}">
+
+            <div class="input-group d-flex" style="width: 100%;">
+                <div class="input-group-prepend"><span class="input-group-text"
+                                                       style="border-radius: 0px;border-top-left-radius: 5px;border-top-right-radius: 0px;border-bottom-left-radius: 5px;"><i
+                        class="fa fa-search"></i></span></div>
+                <input class="searchbar" name="research" type="search" placeholder="  Je recherche..."
+                       style="border-radius: 0px;">
+                <select name="type_research">
+                    <option value="Titre">Titre</option>
+                    <option value="Auteur">Auteur</option>
+                    <option value="Genre">Genre</option>
+                    <option value="Annee">Année</option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit"
+                            style="background: rgba(32,160,11,0.75); border-radius: 0px;border-top-right-radius: 5px;border-bottom-right-radius: 5px;">
+                        Rechercher
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </section>
+    
+    <div class="team-grid">
+        <div class="container">
+            <div class="row justify-content-center people">
+            	{% for album in la_liste %}
+                <div class="col-md-4 col-lg-3 item" onclick="location.href='{{ url_for('modificationAlbum', id = album.id) }}'">
+                    <div class="box" style="background: url(&quot;{{ album.img }}&quot;) center / contain no-repeat;">
+                        <div class="cover" style="background: rgba(32,160,11,0.75);">
+                            <h3 class="name">{{ album.title }}</h3><h4 class="title">de {{ album.author }}</h4>
+                            <p class="title">{{ album.genre }}</p>
+                            <div class="social">
+                                <p style="color: var(--light);">{{ album.annee }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
+    {% endblock %}
     {% endblock %}
     <footer class="py-5 bg-black">
         <div class="container">

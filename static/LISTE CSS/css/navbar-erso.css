@@ -1,0 +1,46 @@
+.navbar-light .navbar-brand {
+  background: url("../../assets/img/logo.svg") center no-repeat;
+  width: 150px;
+}
+
+#navcol-1 {
+  font-size: 13px;
+  font-weight: 600;
+  font-family: Montserrat, sans-serif;
+  text-transform: uppercase;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgb(34,34,34);
+}
+
+#liste-jeux img {
+  width: 150px;
+}
+
+.col.jeux {
+  align-items: center;
+  padding-left: 1%;
+  padding-right: 0%;
+}
+
+.liens-jeux a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.liens-jeux a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.liens-jeux p {
+  text-decoration: none;
+  color: black;
+}
+
+.liens-jeux:hover {
+  text-decoration: none;
+  color: black;
+}
+

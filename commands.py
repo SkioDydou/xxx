@@ -22,12 +22,15 @@ def loaddb(filename):
     db.session.commit()
 
     for x in albums:
+        b = ""
         a = authors[x["author"]]
         u = Album(
             title = x["title"],
             img = x["img"],
             annee = x["annee"],
             genre = x["genre"],
+            auteur = x["author"],
+            note = b,
             author_id = a.id
         )
         db.session.add(u)

@@ -1,11 +1,13 @@
 from .app import app, db
 from flask import render_template, url_for, redirect, flash, request, Flask, request, jsonify
-from .models import get_sample, get_details, get_details2, get_author, get_albums_by_author, get_author_by_name, sup_album, Author, User, Album
+from .models import *
 from flask_wtf import FlaskForm
 from wtforms import StringField, HiddenField, PasswordField, IntegerField, SubmitField
 from wtforms.validators import DataRequired
 from hashlib import sha256
 from flask_login import login_user, current_user, logout_user, login_required
+
+###################### FORMULAIRES ###################### 
 
 class AlbumForm(FlaskForm):
     id = HiddenField('id')
@@ -13,7 +15,7 @@ class AlbumForm(FlaskForm):
     annee = IntegerField('Modifier l\'annee', validators = [DataRequired()])
     genre = StringField('Modifier le genre', validators = [DataRequired()])
     auteur = StringField('Modifier l\'auteur', validators = [DataRequired()])
-
+    img = StringField('Modifier l\'image', validators = [DataRequired()])
 
 class LoginForm(FlaskForm):
     username = StringField('Pseudo')
@@ -45,9 +47,33 @@ class InscriptionForm(FlaskForm):
         else :
             return 1;
 
-class RechercheForm(FlaskForm):
-    search = StringField('Rechercher', [DataRequired()])
-    submit = SubmitField('Rechercher')
+class CreationAlbumForm(FlaskForm):
+    id = HiddenField('id')
+    title = StringField('Ajouter un nom', validators = [DataRequired()])
+    annee = IntegerField('Ajouter une annee', validators = [DataRequired()])
+    genre = StringField('Ajouter un genre', validators = [DataRequired()])
+    auteur = StringField('Ajouter un auteur', validators = [DataRequired()])
+    img = StringField('Ajouter une image', validators = [DataRequired()])
+
+###################### Routes ###################### 
+
+@app.route("/add_album/", methods=("GET", "POST"))
+@login_required
+def add_album():
+    a = None
+    f = CreationAlbumForm()
+    if f.validate_on_submit():
+        title = f.title.data
+        a = Album(img=f.img.data,
+                title=f.title.data,
+                genre=f.genre.data,
+                annee=f.annee.data,
+                auteur=f.auteur.data)
+        db.session.add(a)
+        db.session.commit()
+        return redirect(url_for('listeDesAlbums'))
+    return render_template("add_album.html", album = a, form = f,
+    title="Ajouter Album")
 
 @app.route("/")
 def accueil():
@@ -56,7 +82,7 @@ def accueil():
         title="PasSpotify"
     )
 
-@app.route("/aPropos")
+@app.route("/aPropos/")
 def aPropos():
     return render_template(
         "aPropos.html",
@@ -64,8 +90,7 @@ def aPropos():
     )
 
 
-
-@app.route("/ListeDesAlbums")
+@app.route("/listeDesAlbums/")
 def listeDesAlbums():
     return render_template(
         "ListeDesAlbums.html",
@@ -96,7 +121,7 @@ def logout():
     logout_user()
     return redirect(url_for('accueil'))
 
-@app.route("/ModificationAlbum/<id>")
+@app.route("/modificationAlbum/<id>")
 def modificationAlbum(id):
     return render_template(
         "ModificationAlbum.html",
@@ -104,13 +129,6 @@ def modificationAlbum(id):
         title="Modification Album"
     )
 
-
-@app.route("/Recherche")
-def recherche():
-    return render_template(
-        "Recherche.html",
-        title="Recherche"
-    )
 
 @app.route("/delete/album/<int:id>")
 def delete_album(id):
@@ -129,7 +147,7 @@ def edit_album(id = None):
     else:
         a = None
     f = AlbumForm(id = id, name = nomAlbum )
-    return render_template("edit-author.html", album = a, form = f,
+    return render_template("edit_album.html", album = a, form = f,
     title="Edition Album")
 
 @app.route("/save/album/", methods=["POST"])
@@ -141,18 +159,19 @@ def save_album():
             id = int(f.id.data)
             b = get_author(id)
             a = get_details(id) 
-            b.name = f.auteur.data
             a.title = f.title.data
             a.annee = f.annee.data
             a.genre = f.genre.data
+            a.img   = f.img.data
+            a.auteur = f.auteur.data
         db.session.commit()
         return redirect(url_for('listeDesAlbums', id = id))
-    return render_template("edit-author.html", album = a, form = f,
+    return render_template("edit_album.html", album = a, form = f,
     title="Sauvegarde Album")
 
 @app.route('/album/<int:id>')
 def one_author(id):
-    return render_template('edit-author.html',
+    return render_template('edit_album.html',
     author = get_author(id),
     albums = get_albums_by_author(id),
     title="PasSpotify"
@@ -180,19 +199,28 @@ def inscription():
             erreur = 2
     return render_template("Inscription.html",form=f, erreur=erreur, title="Inscription")
 
-class SearchForm(FlaskForm):
-  search = StringField('search', [DataRequired()])
-  submit = SubmitField('Search',
-                       render_kw={'class': 'btn btn-success btn-block'})
 
-@app.route('/search', methods=['POST'])
+
+@app.route("/recherche/", methods=['POST', 'GET'])
 def search():
-    form = SearchForm()
-    if request.method == 'POST' and form.validate_on_submit():
-        return redirect((url_for('search_results', query=form.search.data)))
-    return render_template('Recherche.html', form=form)
-
-@app.route('/search', methods=['GET', 'POST'])
-def search_results(query):
-  results = Album.query.whoosh_search(query).all()
-  return render_template('Recherche.html', query=query, results=results)
+    liste_albums = []
+    recherche = ""
+    type_recherche = ""
+    liste_albums=get_sample()
+    if request.method == "POST":
+        recherche = request.form.get('research')
+        type_recherche = request.form.get('type_research')
+        if type_recherche == "Titre":
+            liste_albums = recherche_titre(recherche)
+        elif type_recherche == "Annee":
+            liste_albums = recherche_annee(recherche)
+        elif type_recherche == "Auteur":
+            liste_albums = recherche_auteur(recherche)
+        else:
+            type_recherche == "Genre"
+            liste_albums = recherche_genre(recherche)
+    return render_template(
+        "Recherche.html",
+        type_recherche=type_recherche,
+        recherche=recherche,
+        la_liste=liste_albums)
