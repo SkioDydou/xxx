@@ -41,7 +41,7 @@
                 </ul>
                 {% endif %}
                 <div class="d-flex justify-content-center h-100">
-                    <div class="searchbar"><input type="text" class="search_input" placeholder="Search..."><a class="search_icon" href="#"><i class="fas fa-search"></i></a></div>
+                    <div class="searchbar"><a class="search_icon" href="{{ url_for ("search") }}"><i class="fas fa-search"></i></a></div>
                 </div>
             </div>
         </div>
@@ -60,6 +60,9 @@
     </header>
     <div class="container">
         <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-5"><img class="rounded-circle img-fluid" src="{{ album.img }}"></div>
+            </div>
             <div class="col-lg-6 order-lg-1">
                 <div class="p-5">
                     {% with messages = get_flashed_messages() %}
@@ -80,13 +83,15 @@
                             "form-group"
                             {% endif %}
                             >
-                                {{ form.title.label }} {{ form.title(size = 50, class_="form-control") }}
+                                {{ form.title.label }} {{ form.title(size = 50, class_="form-control", value=album.title) }}
                                 <br>
-                                {{ form.annee.label }} {{ form.annee(size=50, class_="form-control") }}
+                                {{ form.annee.label }} {{ form.annee(size=50, class_="form-control", value=album.annee) }}
                                 <br>
-                                {{ form.genre.label }} {{ form.genre(size=50, class_="form-control") }}
+                                {{ form.genre.label }} {{ form.genre(size=50, class_="form-control", value=album.genre) }}
                                 <br>
-                                {{ form.auteur.label }} {{ form.auteur(size=50, class_="form-control") }}
+                                {{ form.auteur.label }} {{ form.auteur(size=50, class_="form-control", value=album.auteur) }}
+                                <br>
+                                {{ form.img.label }} {{ form.img(size=50, class_="form-control", value=album.img) }}
                             </div>
                             {% if form.title.errors %}
                             <ul class="list-group">

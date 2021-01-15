@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>{{ album.title }}</title>
+    <title>Ajouter Album</title>
     <link rel="stylesheet" href="../../static/ModificationAlbum CSS/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i">
@@ -13,7 +13,7 @@
 </head>
 <body>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark navbar-custom">
-        <div class="container"><img src="../static/img/passpotify-logo.png" style="width: 80px;height: 80px;"><a class="navbar-brand" href="#"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarResponsive"><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><img src="../../static/img/passpotify-logo.png" style="width: 80px;height: 80px;"><a class="navbar-brand" href="#"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarResponsive"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item"></li>
@@ -49,8 +49,7 @@
     <header class="masthead text-center text-white">
         <div class="masthead-content">
             <div class="container">
-                <h1 class="masthead-heading mb-0">Modification de l'album</h1>
-                <h2 class="masthead-subheading mb-0">"{{ album.title }}"</h2>
+                <h1 class="masthead-heading mb-0">Ajout d'un album</h1>
             </div>
         </div>
         <div class="bg-circle-1 bg-circle"></div>
@@ -71,22 +70,20 @@
                             </ul>
                         {% endif %}
                     {% endwith %}
-                        <form role="form" method="POST", action="{{ url_for('save_album') }}">
+                        <form role="form" method="POST", action="{{ url_for('add_album') }}">
                             {{ form.hidden_tag() }}
                             <div class=
-                            {% if form.title.errors %} 
-                            "form-group has-error"
-                            {% else %}
-                            "form-group"
-                            {% endif %}
                             >
-                                {{ form.title.label }} {{ form.title(size = 50, class_="form-control") }}
+                                {{ form.title.label }} {{ form.title(size = 50, class_="form-control", placeholder="Titre") }}
                                 <br>
-                                {{ form.annee.label }} {{ form.annee(size=50, class_="form-control") }}
+                                {{ form.annee.label }} {{ form.annee(size=50, class_="form-control", placeholder="Année") }}
                                 <br>
-                                {{ form.genre.label }} {{ form.genre(size=50, class_="form-control") }}
+                                {{ form.genre.label }} {{ form.genre(size=50, class_="form-control", placeholder="Genre") }}
                                 <br>
-                                {{ form.auteur.label }} {{ form.auteur(size=50, class_="form-control") }}
+                                {{ form.auteur.label }} {{ form.auteur(size=50, class_="form-control", placeholder="Auteur") }}
+                                <br>
+                                {{ form.img.label }} {{ form.img(size=500, class_="form-control", value="https://assets.stickpng.com/images/5a4613eed099a2ad03f9c996.png") }}
+                                <br>
                             </div>
                             {% if form.title.errors %}
                             <ul class="list-group">
